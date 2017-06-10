@@ -4,6 +4,29 @@ var BlueD = BlueD ||{};
 // create BlueD.UI
 var BlueD = {
     UI: {
+        // refresh and turn on click listeners
+        refreshClickListener: function() {
+            // turn off button listeners
+            $('#wrapper .close-message').off();
+            $('#wrapper #user-log').off();
+            $('#wrapper #log-close').off();
+
+            // turn on buttons
+            $('#wrapper .close-message').on('click', function() {
+                var messageId = 'msg' + $(this).attr('id').slice(3);
+                var targetId = '#' + messageId;
+                $(targetId).remove();
+                BlueD.UI.inboxDelete(messageId);
+            });
+            $('#wrapper #user-log').on('click', function() {
+                $('#log').remove();
+                BlueD.UI.logRead();
+            });
+            $('#wrapper #log-close').on('click', function() {
+                $('#log').remove();
+            });
+        },
+
         // create and manage inbox
         inbox: [],
         inboxDelete: function(message) {
@@ -14,19 +37,22 @@ var BlueD = {
             };
         },
 
-        // refreshes listeners so jquery works with dynamically created html objects
-        refreshClickListener: function() {
-            $('#wrapper .close-message').off();
-            $('#wrapper .close-message').on('click', function() {
-                var messageId = 'msg' + $(this).attr('id').slice(3);
-                var targetId = '#' + messageId;
-                $(targetId).remove();
-                BlueD.UI.inboxDelete(messageId);
-            });
+        // create and manage log
+        log: [],
+        logRead: function() {
+            var $divLog = "<div class='row' id='log'><div class='col-sm-2' id='log-title'><h4>log</h4></div>\
+            <div class='col-sm-6'><ul id='log-ul'></ul></div>\
+            <div class='col-sm-2'><div id='log-close'><h4>close</h4></div></div>";
+            $('.screen').prepend($divLog);
+            for(i=0;i < BlueD.UI.log.length;i++) {
+                var $logEntry = "<li>" + BlueD.UI.log[i][0] + " - " + BlueD.UI.log[i][1] + "</li>";
+                $('#log-ul').prepend($logEntry);
+            };
+            BlueD.UI.refreshClickListener();
         },
 
         // this function creates a message and adds it to inbox
-        createMessage: function(title,message,type) {
+        createMessage: function(title,message,type,log) {
             BlueD.UI.TOTAL_MESSAGES++;
             var messageID = 'msg' + BlueD.UI.TOTAL_MESSAGES;
             var buttonID = 'btn' + BlueD.UI.TOTAL_MESSAGES;
@@ -40,14 +66,14 @@ var BlueD = {
             " + $divMessageHeader + $divMessageContent + "</div>";
             switch(type) {
                 case 'positive':
-                    $('.inbox').append($divMessagePositive);
+                    $('.screen').prepend($divMessagePositive);
                     BlueD.UI.inbox.push(messageID);
-                    BlueD.UI.refreshClickListener();
+                    BlueD.UI.log.push([log,type]);
                     break;
                 case 'negative':
-                    $('.inbox').append($divMessageNegative);
+                    $('.screen').prepend($divMessageNegative);
                     BlueD.UI.inbox.push(messageID);
-                    BlueD.UI.refreshClickListener();
+                    BlueD.UI.log.push([log,type]);
                     break;
             };
             BlueD.UI.refreshClickListener();
