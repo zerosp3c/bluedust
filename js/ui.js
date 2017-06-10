@@ -10,8 +10,17 @@ var BlueD = {
             $('#wrapper .close-message').off();
             $('#wrapper #user-log').off();
             $('#wrapper #log-close').off();
+            $('#wrapper .user-terminal-text').off();
 
             // turn on buttons
+            $('#wrapper .user-terminal-text').on('keydown', function(event) {
+                if (event.which === 13) {
+                    event.preventDefault();
+                    var userTerminalText = $('.user-terminal-text').val();
+                    $('.user-terminal-text').val('');
+                    return(userTerminalText);
+                };
+            });
             $('#wrapper .close-message').on('click', function() {
                 var messageId = 'msg' + $(this).attr('id').slice(3);
                 var targetId = '#' + messageId;
@@ -25,6 +34,14 @@ var BlueD = {
             $('#wrapper #log-close').on('click', function() {
                 $('#log').remove();
             });
+        },
+
+        // enter user terminal text
+        userEnter: function(e) {
+            if (e.keyCode===13) {
+                e.preventDefault();
+                alert('enter was pressed');
+            };
         },
 
         // create and manage inbox
