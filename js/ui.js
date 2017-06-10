@@ -57,9 +57,5 @@ var BlueD = {
 
 // this code runs when the HTML DOM is ready
 $(document).ready(function() {
-    // create message
-    $('#user-menu').on('click', function () {
-        BlueD.UI.createMessage('title','message','positive');
-    });
     BlueD.UI.refreshClickListener();
 });
