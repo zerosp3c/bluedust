@@ -6,18 +6,30 @@ var BlueD = {
     UI: {
         // global variables
         TOTAL_MESSAGES: 0,
-        MESSAGE_LIST: {},
+
+        // create and manage inbox
+        inbox: [],
+        inboxDelete: function(message) {
+            for (i in BlueD.UI.inbox) {
+                if (BlueD.UI.inbox[i] === message) {
+                    BlueD.UI.inbox.splice(i,1);
+                };
+            };
+        },
 
         // refreshes listeners so jquery works with dynamically created html objects
         refreshClickListener: function() {
             $('#wrapper .close-message').off();
             $('#wrapper .close-message').on('click', function() {
-                var targetId = '#msg' + $(this).attr('id').slice(3);
+                var messageId = 'msg' + $(this).attr('id').slice(3);
+                var targetId = '#' + messageId;
                 $(targetId).remove();
+                BlueD.UI.inboxDelete(messageId);
+                alert(BlueD.UI.inbox);
             });
         },
 
-        // this function creates a message and adds it to .inbox
+        // this function creates a message and adds it to inbox
         createMessage: function(title,message,type) {
             BlueD.UI.TOTAL_MESSAGES++;
             var messageID = 'msg' + BlueD.UI.TOTAL_MESSAGES;
@@ -33,10 +45,12 @@ var BlueD = {
             switch(type) {
                 case 'positive':
                     $('.inbox').append($divMessagePositive);
+                    BlueD.UI.inbox.push(messageID);
                     BlueD.UI.refreshClickListener();
                     break;
                 case 'negative':
                     $('.inbox').append($divMessageNegative);
+                    BlueD.UI.inbox.push(messageID);
                     BlueD.UI.refreshClickListener();
                     break;
             };
@@ -49,7 +63,7 @@ var BlueD = {
 $(document).ready(function() {
     // create message
     $('#user-menu').on('click', function () {
-        BlueD.UI.createMessage('title','message','negative');
+        BlueD.UI.createMessage('title','message','positive');
     });
     BlueD.UI.refreshClickListener();
 });
