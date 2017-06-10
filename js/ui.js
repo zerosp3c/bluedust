@@ -4,9 +4,6 @@ var BlueD = BlueD ||{};
 // create BlueD.UI
 var BlueD = {
     UI: {
-        // global variables
-        TOTAL_MESSAGES: 0,
-
         // create and manage inbox
         inbox: [],
         inboxDelete: function(message) {
@@ -25,7 +22,6 @@ var BlueD = {
                 var targetId = '#' + messageId;
                 $(targetId).remove();
                 BlueD.UI.inboxDelete(messageId);
-                alert(BlueD.UI.inbox);
             });
         },
 
