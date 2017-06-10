@@ -12,7 +12,8 @@ var BlueD = {
         refreshClickListener: function() {
             $('#wrapper .close-message').off();
             $('#wrapper .close-message').on('click', function() {
-                 alert('click');
+                var targetId = '#msg' + $(this).attr('id').slice(3);
+                $(targetId).remove();
             });
         },
 
@@ -25,8 +26,10 @@ var BlueD = {
             var $divCloseMessage = "<div class='btn btn-secondary close-message' role='button' id=" + buttonID +"></div>";
             var $divMessageHeader = "<div class='message-header'>" + $divMessageTitle + $divCloseMessage + "</div>";
             var $divMessageContent = "<div class='message-content'>" + message + "</div>";
-            var $divMessagePositive = "<div class='message-positive message' id=" + messageID + ">" + $divMessageHeader + $divMessageContent + "</div>";
-            var $divMessageNegative = "<div class='message-negative message' id=" + messageID + ">" + $divMessageHeader + $divMessageContent + "</div>";
+            var $divMessagePositive = "<div class='message-positive message' id=" + messageID + ">\
+            " + $divMessageHeader + $divMessageContent + "</div>";
+            var $divMessageNegative = "<div class='message-negative message' id=" + messageID + ">\
+            " + $divMessageHeader + $divMessageContent + "</div>";
             switch(type) {
                 case 'positive':
                     $('.inbox').append($divMessagePositive);
@@ -42,13 +45,7 @@ var BlueD = {
     },
 };
 
-var refreshClickListener = function() {
-    $('#wrapper .close-message').off();
-    $('#wrapper .close-message').on('click', function() {
-        alert('click');
-    });
-};
-
+// this code runs when the HTML DOM is ready
 $(document).ready(function() {
     // create message
     $('#user-menu').on('click', function () {
