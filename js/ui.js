@@ -4,8 +4,10 @@ var BlueD = BlueD ||{};
 // create BlueD.UI
 var BlueD = {
     UI: {
-        // refresh and turn on click listeners
         userTerminalText: '',
+        log: [],
+
+        // refresh clickers
         refreshClickListener: function() {
             // turn off button listeners
             $('#wrapper .close-message').off();
@@ -18,11 +20,11 @@ var BlueD = {
                 var length = $('.user-terminal-text').val().length;
                 if (event.which === 13) {
                     event.preventDefault();
-                    BlueD.UI.userTerminalText = $('.user-terminal-text').val().slice(14);
-                    $('.user-terminal-text').val('dnl@olivaw: >>');
+                    BlueD.UI.log.push([$('.user-terminal-text').val(),'input']);
+                    BlueD.UI.userTerminalText = $('.user-terminal-text').val().slice(15);
                     $echo = "<p>>> " + BlueD.UI.userTerminalText + "</p>";
                     BlueD.UI.echo($echo);
-                } else if (event.which === 8 && length <= 14) {
+                } else if (event.which === 8 && length <= 15) {
                     event.preventDefault();
                 } else if (event.which === 38) {
                     event.preventDefault();
@@ -42,7 +44,7 @@ var BlueD = {
                 $('#log').remove();
                 BlueD.UI.logRead();
             });
-            
+
             $('#wrapper #log-close').on('click', function() {
                 $('#log').remove();
             });
@@ -50,6 +52,7 @@ var BlueD = {
 
         // work with terminal text
         echo: function(echo) {
+            $('.user-terminal-text').val('dnl@olivaw: >> ');
             $('#terminal-echo').empty();
             $('#terminal-echo').append(echo);
             BlueD.UI.refreshClickListener();
@@ -57,7 +60,7 @@ var BlueD = {
 
         reverseEcho: function(echo) {
             $('.user-terminal-text').val('');
-            $('.user-terminal-text').val('dnl@olivaw: >>' + echo);
+            $('.user-terminal-text').val('dnl@olivaw: >> ' + echo);
             BlueD.UI.refreshClickListener();
         },
 
@@ -72,7 +75,6 @@ var BlueD = {
         },
 
         // create and manage log
-        log: [],
         logRead: function() {
             var $divLog = "<div class='row' id='log'><div class='col-sm-2' id='log-title'><h4>log</h4></div>\
             <div class='col-sm-6'><ul id='log-ul'></ul></div>\
