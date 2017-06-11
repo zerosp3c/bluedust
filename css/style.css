@@ -101,19 +101,11 @@ footer li img {
 }
 
 .terminal {
-    height: 45px;
+    height: 35px;
     padding: 7px 0 7px 7px;
     margin: 0;
-    background-color: #3e403e;
-    font: bold 14px/18px "lucida console",sans-serif;
-    color: #54f054;
-}
-
-.terminal-label {
-    width: 100%;
-    text-align: right;
-    margin: 0;
-    padding: 3px 0 0 0;
+    font: bold 14px/16px "lucida console",sans-serif;
+    color: #3e403e;
 }
 
 .screen {
@@ -189,15 +181,17 @@ footer li img {
   min-width: 70px;
 }
 
+#user-echo {
+  margin: 0 20px 0 20px;
+}
+
 /*
   inputs
 */
 
 .user-terminal-text {
     width: 100%;
-    background-color: #3e403e;
-    border: 2px solid #54f054;
-    float: left;
+    border: 0;
 }
 
 #log {

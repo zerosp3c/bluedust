@@ -5,6 +5,7 @@ var BlueD = BlueD ||{};
 var BlueD = {
     UI: {
         // refresh and turn on click listeners
+        userTerminalText: '',
         refreshClickListener: function() {
             // turn off button listeners
             $('#wrapper .close-message').off();
@@ -14,34 +15,50 @@ var BlueD = {
 
             // turn on buttons
             $('#wrapper .user-terminal-text').on('keydown', function(event) {
+                var length = $('.user-terminal-text').val().length;
                 if (event.which === 13) {
                     event.preventDefault();
-                    var userTerminalText = $('.user-terminal-text').val();
-                    $('.user-terminal-text').val('');
-                    return(userTerminalText);
+                    BlueD.UI.userTerminalText = $('.user-terminal-text').val().slice(14);
+                    $('.user-terminal-text').val('dnl@olivaw: >>');
+                    $echo = "<p>>> " + BlueD.UI.userTerminalText + "</p>";
+                    BlueD.UI.echo($echo);
+                } else if (event.which === 8 && length <= 14) {
+                    event.preventDefault();
+                } else if (event.which === 38) {
+                    event.preventDefault();
+                    $echo = BlueD.UI.userTerminalText;
+                    BlueD.UI.reverseEcho($echo);
                 };
             });
+
             $('#wrapper .close-message').on('click', function() {
                 var messageId = 'msg' + $(this).attr('id').slice(3);
                 var targetId = '#' + messageId;
                 $(targetId).remove();
                 BlueD.UI.inboxDelete(messageId);
             });
+
             $('#wrapper #user-log').on('click', function() {
                 $('#log').remove();
                 BlueD.UI.logRead();
             });
+            
             $('#wrapper #log-close').on('click', function() {
                 $('#log').remove();
             });
         },
 
-        // enter user terminal text
-        userEnter: function(e) {
-            if (e.keyCode===13) {
-                e.preventDefault();
-                alert('enter was pressed');
-            };
+        // work with terminal text
+        echo: function(echo) {
+            $('#terminal-echo').empty();
+            $('#terminal-echo').append(echo);
+            BlueD.UI.refreshClickListener();
+        },
+
+        reverseEcho: function(echo) {
+            $('.user-terminal-text').val('');
+            $('.user-terminal-text').val('dnl@olivaw: >>' + echo);
+            BlueD.UI.refreshClickListener();
         },
 
         // create and manage inbox
