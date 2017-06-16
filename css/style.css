@@ -28,10 +28,6 @@ header p {
   margin: 0;
 }
 
-/*
-  divs
-*/
-
 .jumbotron {
   display: flex;
   align-items: center;
@@ -185,21 +181,11 @@ footer li img {
   margin: 0 20px 0 20px;
 }
 
-/*
-  inputs
-*/
-
-.user-terminal-text {
-    width: 100%;
-    border: 0;
-}
-
 #log {
   width: 100%;
   min-height: 65px;
   text-justify: top;
 }
-
 
 #log-title {
   float: left;
@@ -214,6 +200,15 @@ footer li img {
   float: right;
   cursor: pointer;
   vertical-align: center;
+}
+
+/*
+  inputs
+*/
+
+#user-terminal-text {
+    width: 100%;
+    border: 0;
 }
 
 /*
