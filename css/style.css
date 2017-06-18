@@ -116,18 +116,20 @@ footer li img {
   padding: 20px 10px 20px 40px;
   margin: 3px;
   min-height: 80px;
-  background-color: #3e403e;
+  background-color: #fff;
+  border: 2px solid #000;
   font: bold 14px/16px "lucida console",sans-serif;
-  color: #54f054;
+  color: #000;
 }
 
 .message-negative {
   padding: 20px 10px 20px 40px;
   margin: 3px;
   min-height: 80px;
-  background-color: #3e403e;
+  background-color: #fff;
+  border: 2px solid #f70606;
   font: bold 14px/16px "lucida console",sans-serif;
-  color: #f83a3a;
+  color: #f70606;
 }
 
 .message-header {
@@ -139,7 +141,7 @@ footer li img {
   padding: 0px;
   margin: 5px 40px 0px 5px;
   font: bold 18px/24px "lucida console",sans-serif;
-  color: #54f054;
+  color: #000;
   float: left;
   cursor: pointer;
 }
@@ -152,8 +154,8 @@ footer li img {
   width: 25px;
   min-height: 25px;
   padding: 0;
-  margin: 10px;
-  background-color: #54f054;
+  margin: 5px;
+  background-color: #f70606;
   color: #000;
   text-align: center;
   box-sizing: border-box;
@@ -200,6 +202,39 @@ footer li img {
   float: right;
   cursor: pointer;
   vertical-align: center;
+}
+
+.ship-info {
+  margin: 5px 20px 5px 20px;
+  padding: 2px;
+  width: 100%;
+  cursor: pointer;
+  font: 14px/14px "lucida console",sans-serif;
+}
+
+.ship-menu {
+  position: relative;
+}
+
+.ship-menu-hover {
+  position: absolute;
+  margin: 5px;
+  padding: 5px;
+  width: 100%;
+  opacity: .8;
+  z-index: 1;
+  border: 1px solid #000;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: #fff;
+  top: -90px;
+}
+
+#ship-menu-hover {
+  height: 0;
+}
+
+.ship-menu-button {
+  margin: auto;
 }
 
 /*

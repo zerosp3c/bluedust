@@ -1,5 +1,3 @@
-
-
 /*
   This is the module that creates the ship. 
 */
@@ -20,7 +18,7 @@ var Ship = {
     FUEL_PER_DAY: 1,
     EVENT_PROBABILITY: 0.15,
 
-    // variables
+    // local variables
     cargo: [],
     cargoWeight: 0,
     armory: [],
@@ -28,10 +26,9 @@ var Ship = {
     shipWeight: 0,
     
     // init and initiate with standard player or enemy settings
-    init: function(distance,crew,food,engines,cargo,money,guns,drones,fuel,loot) {
+    init: function(distance,crew,food,engines,cargo,money,guns,fuel,loot) {
         this.day = 0;
-        this.armor = 200;
-        this.damage =  0;
+        this.hull = 200;
         this.distance = distance;
         this.crew = crew;
         this.food = food;
@@ -39,17 +36,17 @@ var Ship = {
         this.cargoCapacity = cargo;
         this.money = money;
         this.guns = guns;
-        this.drones = drones;
+        this.damage =  3 * guns;
         this.fuel = fuel;
         this.loot = loot;
 		},
 
     // player initiates
     initiate: function() {
-      this.init(0,2,10,6,10,0,1,0,10,0);
+        this.init(0,2,10,6,10,0,1,10,0);
     },
 
-    // shhip functions
+    // ship functions
     weighShip: function() {
         var crew = this.crew * Ship.CREW_WEIGHT;
         var food = this.food * Ship.FOOD_WEIGHT;
@@ -66,6 +63,7 @@ var Ship = {
         };
     },
 
+    // see if ship has capacity to take on weight
     attemptWeight: function(weight) {
         this.weighShip();
         attempt = this.shipWeight + weight;
@@ -77,6 +75,7 @@ var Ship = {
         };
     },
 
+    // add cargo to ship
     addCargo: function(item) {
         var name = item[0];
         var description = item[1];
@@ -92,7 +91,8 @@ var Ship = {
             return false;
         }
     },
-    
+
+    // add weapon to ship
     addWeapon: function(weapon) {
         var name = weapon[0];
         var damage = weapon[1];
