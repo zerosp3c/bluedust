@@ -24,6 +24,7 @@ var Ship = {
     armory: [],
     damage: 0,
     shipWeight: 0,
+    crewList: [],
     
     // init and initiate with standard player or enemy settings
     init: function(distance,crew,food,engines,cargo,money,guns,fuel,loot) {
@@ -43,7 +44,8 @@ var Ship = {
 
     // player initiates
     initiate: function() {
-        this.init(0,2,10,6,10,0,1,10,0);
+        this.init(0,1,10,6,10,0,1,10,0);
+        this.addCrew('john', 'science officer');
     },
 
     // ship functions
@@ -63,7 +65,7 @@ var Ship = {
         };
     },
 
-    // see if ship has capacity to take on weight
+    // see if ship has capacity to take on weight, returs true if there's capacity, else false
     attemptWeight: function(weight) {
         this.weighShip();
         attempt = this.shipWeight + weight;
@@ -75,7 +77,7 @@ var Ship = {
         };
     },
 
-    // add cargo to ship
+    // add cargo to ship, returns false if its too heavy
     addCargo: function(item) {
         var name = item[0];
         var description = item[1];
@@ -87,12 +89,11 @@ var Ship = {
             this.cargo.push(item);
             this.shipWeight += weight;
         } else {
-            console.log('cannot add item')
             return false;
         }
     },
 
-    // add weapon to ship
+    // add weapon to ship, returns false if its too heavy
     addWeapon: function(weapon) {
         var name = weapon[0];
         var damage = weapon[1];
@@ -106,8 +107,19 @@ var Ship = {
             this.shipWeight += weight;
             console.log(this.damage);
         } else {
-            console.log('cannot add weapon');
             return false;
         };
     },
+
+    // add crew to ship, returns false if its too heavy
+    addCrew: function(name, profession) {
+        var attempt = this.CREW_WEIGHT;
+        if (this.attemptWeight(attempt) === true) {
+            var crew = Person;
+            crew.init(name, profession);
+            this.crewList.push([crew.name, crew.profession]);
+        } else {
+            return false;
+        };
+    }
 };

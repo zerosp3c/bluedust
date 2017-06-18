@@ -1,6 +1,10 @@
 # bluedust
 javascript text game
 
-to do
-1. expand ship module
-2. add game module
+how to use:
+currently unusable.
+
+to do:
+1. add remove message function
+2. create ship module
+3. add ship display
