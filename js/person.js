@@ -8,6 +8,7 @@ var Person = {
     MAXIMUM_SPEED: 6,
     MAXIMUM_WEIGHT: 10,
     WEIGHT_PER_STRENGTH: 1,
+    MAXIMUM_XP: 20,
 
     // local variables
     wounds: 0,
@@ -16,6 +17,7 @@ var Person = {
     damage: 0,
     weapons: [],
     inventory: [],
+    xp: 0,
 
     init: function(name, profession) {
         this.name = name;

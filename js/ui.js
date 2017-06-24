@@ -63,7 +63,7 @@ var UI = {
         
         // display crew
         $('#wrapper .crew').on('mouseenter', function() {
-            $divCrew = "<figure class='col-sm-12 ship-menu-hover'><p>okok</p></figure>";
+            $divCrew = "<figure class='col-sm-12 ship-menu-hover'></figure>";
             $('#ship-menu-hover').append($divCrew);
         });
 
@@ -195,11 +195,3 @@ var UI = {
         UI.refreshClickListener();
     }
 };
-
-// this code runs when the HTML DOM is ready
-$(document).ready(function() {
-    UI.refreshClickListener();
-    var testShip = Ship;
-    testShip.initiate();
-    UI.shipInit(testShip);
-});
